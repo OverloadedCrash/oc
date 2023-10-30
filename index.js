@@ -93,7 +93,7 @@ client.once(Events.ClientReady, async c => {
     setInterval(async function() {
       console.log("Promotion inbound")
       doAutomation(currentUser)
-    }, 20000)
+    }, 120000)
   }catch(e){console.log}
 
   console.log(`Ready, logged in as ${c.user.tag}!`)
