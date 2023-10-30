@@ -89,7 +89,7 @@ client.once(Events.ClientReady, async c => {
   }
 
   let currentUser;
-  try{currentUser = await noblox.setCookie(process.env.NEWCOOKIE.toString()); doAutomation(currentUser); 
+  try{currentUser = await noblox.setCookie(process.env.COOKIE.toString()); doAutomation(currentUser); 
     setInterval(async function() {
       console.log("Promotion inbound")
       doAutomation(currentUser)
