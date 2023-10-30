@@ -92,7 +92,7 @@ client.once(Events.ClientReady, async c => {
   try{currentUser = await noblox.setCookie(process.env.NEWCOOKIE.toString()); doAutomation(currentUser); 
     setInterval(async function() {
       doAutomation(currentUser)
-    }, 180000)
+    }, 20000)
   }catch(e){console.log}
 
   console.log(`Ready, logged in as ${c.user.tag}!`)
