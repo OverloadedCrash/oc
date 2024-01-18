@@ -22,7 +22,7 @@ module.exports = {
     .setName('help')
     .setDescription('Gets a list of commands!'),
 
-  async execute(client, interaction, roblox) {
+  async execute(client, interaction, roblox, events) {
     if (this.enabled == false) return;
     if(this.developerOnly == true && interaction.user.id != "1111485486607892562") return;
     

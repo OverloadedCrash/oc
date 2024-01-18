@@ -7,6 +7,7 @@ const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits
 // const roblox = require("./roblox")
 var bodyParser = require('body-parser')
 const noblox = require('noblox.js')
+const events = require('noblox.js')
 
 client.commands = new Collection();
 
@@ -95,7 +96,11 @@ client.once(Events.ClientReady, async c => {
       doAutomation(currentUser)
     }, 120000)
   }catch(e){console.log}
-
+  let currentEvents;
+  try{currentEvents= await noblox.setCookie(process.env.EVENTS.toString()); 
+  }catch(e) {
+    console.log(`Could not log into the events account!`)
+  }
   console.log(`Ready, logged in as ${c.user.tag}!`)
 
   const express = require("express");
@@ -155,7 +160,7 @@ client.on(Events.InteractionCreate, async interaction => {
     if (command.enabled == false) return;
       if(command.developerOnly == true && interaction.user.id != "1111485486607892562") return await interaction.reply({content: 'Sorry, but you do not have permission to use this command!', ephemeral: true});
       if(command.disableDM == true && interaction.guildId == null) return await interaction.reply({content: 'Sorry, but you can only use this command in servers!', ephemeral: true});
-    await command.execute(client, interaction, noblox)
+    await command.execute(client, interaction, noblox, events)
   }catch(e) {
     console.log(e)
     if(interaction.replied || interaction.deferred) {
