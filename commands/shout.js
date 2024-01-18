@@ -17,12 +17,16 @@ module.exports = {
   async execute(client, interaction, roblox, events) {
     if (this.enabled == false) return;
     if(this.developerOnly == true && interaction.user.id != "1111485486607892562") return;
+    let hasRole = interaction.member.roles.cache.some(r => r.id === "1108160095885459496")
+    if(hasRole != true) return;
+    
     try{
       if(events) {
         let user = await events.getCurrentUser();
         let message = interaction.options.getString(`message`) || " ";
         if (user && message) {
             events.shout(201622, message)
+            interaction.reply({content: `Successfully sent shout!`, ephemeral: true})
         }
       }
     }catch(e) {
