@@ -3,6 +3,7 @@ const {Client, Events, Collection, EmbedBuilder, GatewayIntentBits, REST, Routes
 const token = process.env.TOKEN;
 
 const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.DirectMessages, GatewayIntentBits.GuildMembers]});
+console.log(`Test`)
 
 // const roblox = require("./roblox")
 var bodyParser = require('body-parser')
