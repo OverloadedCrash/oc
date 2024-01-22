@@ -61,6 +61,21 @@ client.once(Events.ClientReady, async c => {
     }
   })
 
+  app.post(`/setrank`, async (req, res) => {
+    if(req.body.apiKey) {
+      if(req.body.apiKey != process.env.API_KEY.toString()) return res.send({error: `The API key supplied does not match the server's API key!`, data: ``})
+      if(!req.body.userId || !req.body.groupId || !req.body.rank) return res.send({error: `You must include the 'groupId', 'userId', or 'rank' body params!`, data: ``})
+      try{
+        await noblox.setRank(req.body.groupId, req.body.userId, req.body.rank)
+        res.send({error: ``, data: `Successfully set rank of the user!`})
+      }catch(e) {
+        res.send({error: `The server was unable to set the rank of this user!`, data: ``})
+      }
+    }else{
+      res.send({error: `You must provide an API key!`, data: ``})
+    }
+  })
+
   app.listen(4000);
 })
 
