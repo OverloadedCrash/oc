@@ -47,6 +47,10 @@ client.once(Events.ClientReady, async c => {
   let currentUser;
   try{
     currentUser = await noblox.setCookie(process.env.COOKIE.toString()); 
+    const messageEvent = noblox.onJoinRequest(17198776)
+    messageEvent.on("data", async function(data) {
+     console.log("New message!", data)
+    })
   }catch(e){console.log}
   console.log(`Ready, logged in as ${c.user.tag}!`)
 
