@@ -47,9 +47,16 @@ client.once(Events.ClientReady, async c => {
   let currentUser;
   try{
     currentUser = await noblox.setCookie(process.env.COOKIE.toString()); 
-    const messageEvent = noblox.onJoinRequest(17198776)
+    let groupId = 17198776;
+    const messageEvent = noblox.onJoinRequest(groupId)
     messageEvent.on("data", async function(data) {
-     console.log("New message!", data)
+      try{
+        let handled = await noblox.handleJoinRequest(groupId, data.requester.userId, true)
+        let shouted = await noblox.shout(groupId, `Welcome to the project, ${data.requester.username}.`)
+        console.log(`Done.`)
+      }catch(e) {
+        console.log(`Error doing either the shout or the join request!`)
+      }
     })
   }catch(e){console.log}
   console.log(`Ready, logged in as ${c.user.tag}!`)
